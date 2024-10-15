@@ -26,19 +26,16 @@ public class MySecondOpMode extends LinearOpMode {
     private DcMotor leftDrive;
     private DcMotor rightDrive;
 
-
     @Override
     public void runOpMode() {
         imu = hardwareMap.get(Gyroscope.class, "imu");
-        motorTest = hardwareMap.get(DcMotor.class, "motorTest");
+        // motorTest = hardwareMap.get(DcMotor.class, "motorTest");
         // digitalTouch = hardwareMap.get(DigitalChannel.class, "digitalTouch");
         // sensorColorRange = hardwareMap.get(DistanceSensor.class, "sensorColorRange");
         // servoTest = hardwareMap.get(Servo.class, "servoTest");
 
-
         leftDrive  = hardwareMap.get(DcMotor.class, "leftMotor");
         rightDrive = hardwareMap.get(DcMotor.class, "rightMotor");
-
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -52,8 +49,6 @@ public class MySecondOpMode extends LinearOpMode {
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
             telemetry.update();
-
-
         }
 
         leftDrive.setPower(0);

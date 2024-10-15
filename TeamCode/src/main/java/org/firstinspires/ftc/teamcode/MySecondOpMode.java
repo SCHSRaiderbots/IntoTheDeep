@@ -3,8 +3,10 @@ package org.firstinspires.ftc.teamcode;
 import android.util.Log;
 
 import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Gyroscope;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
@@ -16,7 +18,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 
 
-@TeleOp
+@Autonomous
 public class MySecondOpMode extends LinearOpMode {
     private Gyroscope imu;
     private DcMotor motorTest;
@@ -36,6 +38,10 @@ public class MySecondOpMode extends LinearOpMode {
 
         leftDrive  = hardwareMap.get(DcMotor.class, "leftMotor");
         rightDrive = hardwareMap.get(DcMotor.class, "rightMotor");
+
+        // set the motor directions
+        leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();

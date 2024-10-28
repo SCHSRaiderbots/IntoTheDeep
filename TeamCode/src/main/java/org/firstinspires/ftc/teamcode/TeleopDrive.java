@@ -141,6 +141,14 @@ public class TeleopDrive extends OpMode {
         double v = (rpm / 60) * Motion.HD_HEX_TICKS_PER_REV;
         Motion.setVelocity(v * (forward+turn), v * (forward-turn));
 
+        if (gamepad1.a) {
+            gripper.release();
+        }
+        if (gamepad1.b) {
+            gripper.grip();
+        }
+
+
         if (gamepad1.y) {
             // set the pose
             Motion.setPoseInches(Vision.inchX, Vision.inchY, Vision.degTheta);

@@ -6,11 +6,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Class that keeps the vision code in one place.
@@ -19,6 +24,9 @@ import java.util.List;
  *   vision = new Vision(HardwareMap);
  */
 public class Vision {
+    /** A locale used to format strings */
+    final Locale locale = new Locale("en-US");
+
     /** the webcam */
     WebcamName webcamName;
 
@@ -118,7 +126,12 @@ public class Vision {
         //visionPortal.setProcessorEnabled(tfod, true);
     }
 
+    /**
+     * Method to enable or disable vision processing.
+     * @param enabled
+     */
     void enableAprilTags(boolean enabled) {
+        // enable or disable vision
         visionPortal.setProcessorEnabled(aprilTag, enabled);
     }
 
@@ -127,7 +140,6 @@ public class Vision {
      * side-effects aprilTag
      */
     private void initAprilTag() {
-
         // Create the AprilTag processor.
         aprilTag = new AprilTagProcessor.Builder()
 
@@ -164,20 +176,36 @@ public class Vision {
      * Add telemetry about AprilTag detections.
      */
     public void telemetryAprilTag(Telemetry telemetry) {
-
         List<AprilTagDetection> currentDetections = aprilTag.getDetections();
         telemetry.addData("# AprilTags Detected", currentDetections.size());
 
         // Step through the list of detections and display info for each one.
         for (AprilTagDetection detection : currentDetections) {
             if (detection.metadata != null) {
-                telemetry.addLine(String.format("\n==== (ID %d) %s", detection.id, detection.metadata.name));
-                telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
-                telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
-                telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation));
+                // Report the AprilTag id and its name
+                telemetry.addLine(String.format(locale, "\n==== (ID %d) %s", detection.id, detection.metadata.name));
+
+                // Report the calculated robotPose
+                // the Pose3D robotPose is extracted for us.
+                // The pose information is in inches!
+                Pose3D robotPose = detection.robotPose;
+                Position robotPosition = robotPose.getPosition();
+                YawPitchRollAngles robotOrientation = robotPose.getOrientation();
+                telemetry.addLine(String.format(locale, "robot pose %6.1f %6.1f %6.1f. Yaw %6.1f (deg)",
+                        robotPosition.x, robotPosition.y, robotPosition.z, robotOrientation.getYaw()));
+                // camera position is messed up, so report all the angles
+                telemetry.addLine(String.format(locale, "robot YPR %6.1f %6.1f %6.1f (deg)",
+                        robotOrientation.getYaw(), robotOrientation.getPitch(), robotOrientation.getRoll()));
+
+                // Report the AprilTagPoseFtc ftcPose
+                AprilTagPoseFtc ftcPose = detection.ftcPose;
+                telemetry.addLine(String.format(locale, "XYZ %6.1f %6.1f %6.1f  (inch)", ftcPose.x, ftcPose.y, ftcPose.z));
+                telemetry.addLine(String.format(locale, "PRY %6.1f %6.1f %6.1f  (deg)", ftcPose.pitch, ftcPose.roll, ftcPose.yaw));
+                telemetry.addLine(String.format(locale, "RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", ftcPose.range, ftcPose.bearing, ftcPose.elevation));
             } else {
-                telemetry.addLine(String.format("\n==== (ID %d) Unknown", detection.id));
-                telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detection.center.x, detection.center.y));
+                // No metadata. Report the AprilTag id and its location
+                telemetry.addLine(String.format(locale, "\n==== (ID %d) Unknown", detection.id));
+                telemetry.addLine(String.format(locale, "Center %6.0f %6.0f   (pixels)", detection.center.x, detection.center.y));
             }
         }   // end for() loop
 

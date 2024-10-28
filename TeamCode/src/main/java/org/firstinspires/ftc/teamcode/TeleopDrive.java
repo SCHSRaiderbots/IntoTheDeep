@@ -26,6 +26,8 @@ public class TeleopDrive extends OpMode {
     // the Vision object
     Vision vision = null;
 
+    Gripper gripper;
+
     // Whether or not to use the IMU
     boolean bIMU = false;
 
@@ -60,6 +62,8 @@ public class TeleopDrive extends OpMode {
             // we do not use object recognition
             // .enableTfod(true);
         }
+
+        gripper = new Gripper(hardwareMap);
 
         if (bIMU) {
             // Set up the parameters with which we will use our IMU. Note that integration

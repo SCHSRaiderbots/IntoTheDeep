@@ -146,10 +146,6 @@ public class Motion {
         // dump the firmware
         LogDevice.dumpFirmware(hardwareMap);
 
-        // TODO: don't identify the robot within this code...
-        // identify the robot
-        // identifyRobot(hardwareMap);
-
         // initialize the robot
         switch (robot) {
             case ROBOT_MECANUM:

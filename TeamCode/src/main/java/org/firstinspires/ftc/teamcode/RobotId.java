@@ -26,8 +26,12 @@ public enum RobotId {
     /** Name of the fake RevTouchSensor for this robot */
     public final String stringName;
 
-    /** Identity of the current robot -- defaults to ROBOT_2023 */
-    public static RobotId robot = ROBOT_2023;
+    /**
+     * Identity of the current robot -- defaults to ROBOT_2023.
+     * This member variable is private.
+     * There is a public member variable in Motion.
+     */
+    private static RobotId robot = ROBOT_2023;
 
     /**
      * Constructor
@@ -56,5 +60,20 @@ public enum RobotId {
 
         // we did not find any evidence to contrary, assume robot was set correctly...
         return robot;
+    }
+
+    /**
+     * Set the default robot to robotId.
+     * Then check the hardware map to find the robotId.
+     * @param hardwareMap
+     * @param robotId
+     * @return
+     */
+    static RobotId identifyRobot(HardwareMap hardwareMap, RobotId robotId) {
+        // set the default robot
+        robot = robotId;
+
+        // and then identify
+        return identifyRobot(hardwareMap);
     }
 }

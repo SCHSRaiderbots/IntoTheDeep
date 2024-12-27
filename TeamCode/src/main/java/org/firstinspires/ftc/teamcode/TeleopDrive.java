@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.Motion.robot;
 
+import android.util.Log;
 import androidx.core.math.MathUtils;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -26,6 +27,10 @@ public class TeleopDrive extends OpMode {
     // the Vision object
     Vision vision = null;
 
+    Elevator elevator = null;
+
+    Wrist wrist = null;
+
     Gripper gripper;
 
     // Whether or not to use the IMU
@@ -48,19 +53,29 @@ public class TeleopDrive extends OpMode {
         // report the LynxModules
         LogDevice.dumpFirmware(hardwareMap);
 
-        // Motion.identifyRobot(hardwareMap);
-        robot = RobotId.ROBOT_2023;
-        RobotId.identifyRobot(hardwareMap);
+        // try to identify the robot
+        robot = RobotId.identifyRobot(hardwareMap, RobotId.ROBOT_2023);
+
+        // identify the robot -- we are expecting 2022 for this test
+        Log.d("Identify", robot.toString());
 
         // initialize motion
         Motion.init(hardwareMap);
 
         // create the vision object
         if (robot == RobotId.ROBOT_2022 || robot == RobotId.ROBOT_2023) {
+            // TODO: currently uses ROBOT_2022 camera offset!
             vision = new Vision(hardwareMap);
 
             // we do not use object recognition
             // .enableTfod(true);
+        }
+
+        // create the subsystems
+        if (robot == RobotId.ROBOT_2023) {
+            elevator = new Elevator(hardwareMap);
+
+            wrist = new Wrist(hardwareMap);
         }
 
         gripper = new Gripper(hardwareMap);
@@ -119,6 +134,7 @@ public class TeleopDrive extends OpMode {
         Motion.updateRobotPose();
         Motion.reportPosition(telemetry);
 
+        // TODO: 2022 robot reports as ROBOT_2023!
         telemetry.addData("Robot", robot);
 
         if (vision != null) {
@@ -148,10 +164,30 @@ public class TeleopDrive extends OpMode {
             gripper.grip();
         }
 
+        // if we have a wrist...
+        if (wrist != null) {
+            double power = -gamepad2.right_stick_y;
+            if (Math.abs(power) < 0.1) {
+                wrist.setPower(0.0);
+            } else {
+                wrist.setPower(power);
+            }
+        }
 
         if (gamepad1.y) {
             // set the pose
             Motion.setPoseInches(Vision.inchX, Vision.inchY, Vision.degTheta);
+        }
+
+        // if we have an elevator
+        if (elevator != null) {
+            if (gamepad2.a) {
+                elevator.setTargetPosition(800);
+            }
+            if (gamepad2.b) {
+                elevator.setTargetPosition(1900);
+            }
+            telemetry.addData("Elevator Position", "%d units", elevator.getPosition());
         }
     }
 

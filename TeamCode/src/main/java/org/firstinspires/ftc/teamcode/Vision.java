@@ -30,7 +30,7 @@ public class Vision {
     final Locale locale = new Locale("en-US");
 
     /** the webcam */
-    final WebcamName webcamName;
+    // final WebcamName webcamName;
 
     private static final boolean USE_WEBCAM = true;
 

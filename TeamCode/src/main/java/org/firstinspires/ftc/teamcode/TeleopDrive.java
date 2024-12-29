@@ -3,13 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import static org.firstinspires.ftc.teamcode.Motion.robot;
 
 import android.util.Log;
-import androidx.core.math.MathUtils;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;

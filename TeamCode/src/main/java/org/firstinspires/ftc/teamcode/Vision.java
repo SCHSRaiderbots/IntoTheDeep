@@ -30,7 +30,7 @@ public class Vision {
     final Locale locale = new Locale("en-US");
 
     /** the webcam */
-    WebcamName webcamName;
+    final WebcamName webcamName;
 
     private static final boolean USE_WEBCAM = true;
 
@@ -58,9 +58,9 @@ public class Vision {
      * it's pointing straight left, -90 degrees for straight right, etc. You can also set the roll
      * to +/-90 degrees if it's vertical, or 180 degrees if it's upside-down.
      */
-    private Position cameraPosition = new Position(DistanceUnit.INCH,
+    private final Position cameraPosition = new Position(DistanceUnit.INCH,
             -3.875, 7.0, 5.0, 0);
-    private YawPitchRollAngles cameraOrientation = new YawPitchRollAngles(AngleUnit.DEGREES,
+    private final YawPitchRollAngles cameraOrientation = new YawPitchRollAngles(AngleUnit.DEGREES,
             0, -90, 0, 0);
 
     /**
@@ -76,7 +76,7 @@ public class Vision {
      *   visionPortal.setProcessorEnabled(aprilTag, true)
      *   visionPortal.close() when done
      */
-    private VisionPortal visionPortal;
+    private final VisionPortal visionPortal;
 
     // Since ImageTarget trackables use mm to specify their dimensions, we must use mm for all the physical dimension.
     // define some constants and conversions here
@@ -159,7 +159,7 @@ public class Vision {
 
     /**
      * Method to enable or disable vision processing.
-     * @param enabled
+     * @param enabled enable or disable AprilTag processing
      */
     void enableAprilTags(boolean enabled) {
         // enable or disable vision

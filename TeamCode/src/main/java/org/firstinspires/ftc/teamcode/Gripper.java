@@ -18,10 +18,16 @@ public class Gripper {
     }
 
     public void grip() {
+        // start gripping
         servoGripper.setPosition(posGrip);
     }
 
+    public void grip(boolean bGrip) {
+        servoGripper.setPosition((bGrip)? posGrip : posFlat);
+    }
+
     public void release() {
+        // release the grip
         servoGripper.setPosition(posFlat);
     }
 }

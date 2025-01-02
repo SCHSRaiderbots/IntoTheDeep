@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.command;
 
 /**
- * Make a command-based system similar to the FRC WPIlib.
+ * Make a command-based system similar to the FRC WPILib.
  * <p>
- *     WPIlib make Command an interface... The interface has the decorations.
+ *     WPILib make Command an interface... The interface has the decorations.
  * </p>
  */
 public class Command {

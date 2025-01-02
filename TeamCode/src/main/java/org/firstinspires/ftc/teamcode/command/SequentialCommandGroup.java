@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.command;
 
 public class SequentialCommandGroup extends Command {
-    int iCommand = 0;
+    int iCommand;
     Command[] aCommands;
 
     /**

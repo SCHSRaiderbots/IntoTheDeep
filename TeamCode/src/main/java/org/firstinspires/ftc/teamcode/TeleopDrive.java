@@ -31,6 +31,8 @@ public class TeleopDrive extends OpMode {
 
     Gripper gripper;
 
+    SampleDetector sampler;
+
     // Whether or not to use the IMU
     boolean bIMU = false;
 
@@ -65,8 +67,8 @@ public class TeleopDrive extends OpMode {
             // TODO: currently uses ROBOT_2022 camera offset!
             vision = new Vision(hardwareMap);
 
-            // we do not use object recognition
-            // .enableTfod(true);
+            // get the Sample detector
+            sampler = new SampleDetector(hardwareMap);
         }
 
         // create the subsystems
@@ -186,6 +188,11 @@ public class TeleopDrive extends OpMode {
                 elevator.setTargetPosition(1900);
             }
             telemetry.addData("Elevator Position", "%d units", elevator.getPosition());
+        }
+
+        // if we have a SampleDetector
+        if (sampler != null) {
+            telemetry.addData("Sample Color", "%s", sampler.getColor());
         }
     }
 

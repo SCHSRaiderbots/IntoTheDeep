@@ -6,15 +6,13 @@ import static org.firstinspires.ftc.teamcode.IntoTheDeep.tileYR;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import org.firstinspires.ftc.teamcode.Motion;
 
-// import org.firstinspires.ftc.teamcode.command.CommandBase;
-// import org.firstinspires.ftc.teamcode.command.ParallelCommandGroup;
-// import org.firstinspires.ftc.teamcode.command.SequentialCommandGroup;
+import org.firstinspires.ftc.teamcode.command.Command;
+import org.firstinspires.ftc.teamcode.command.SequentialCommandGroup;
 
 @Autonomous(name="Auto Wave", group="testing")
 public class AutoWave extends OpMode {
-    // CommandBase command;
+    Command command;
     Vision vision;
     // Arm arm;
     // Wrist wrist;
@@ -49,21 +47,18 @@ public class AutoWave extends OpMode {
 
     @Override
     public void start() {
-        /*
         // make the command
         command = new SequentialCommandGroup(
-                new Delay(0.5),
+                // new Delay(0.5),
                 // drive forward
-                new DriveForward( tileX(2, 6.0)),
-                new DriveTurnToward(tileXR(2.5), tileYR(-0.5)),
-                new DriveTo(tileX(2.5), tileYR(-0.5)),
-                new MoveArm(0, arm)
+                new DriveForward( tileX(2, 6.0))
+                // new DriveTurnToward(tileXR(2.5), tileYR(-0.5)),
+                // new DriveTo(tileX(2.5), tileYR(-0.5)),
+                // new MoveArm(0, arm)
         );
 
         command.initialize();
         command.execute();
-
-         */
     }
 
     @Override
@@ -71,15 +66,13 @@ public class AutoWave extends OpMode {
         // figure our position
         Motion.updateRobotPose();
 
-        /*
         if (!command.isFinished()) {
             command.execute();
         }
-         */
     }
 
     @Override
     public void stop() {
-        // command.end(true);
+        command.end(true);
     }
 }

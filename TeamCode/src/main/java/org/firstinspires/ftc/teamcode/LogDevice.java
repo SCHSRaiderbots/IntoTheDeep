@@ -13,9 +13,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Static routines that dump information about hardware devices to the log file.
- *
+ * <p>
  * These routines would usually be called during initialization.
- *
+ * <p>>
  * Used to explore DcMotorEx configuration (e.g., PIDF coefficients)
  * Used to describe Servo
  */

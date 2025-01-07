@@ -17,12 +17,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  */
 public class IntoTheDeep {
     /** We can be on the BLUE or the RED alliance */
-    enum Alliance {BLUE, RED}
+    public enum Alliance {BLUE, RED}
     /** Our current alliance */
     public static Alliance alliance = Alliance.RED;
 
     /** We can start in the NET_ZONE or the OBSERVATION_ZONE */
-    enum StartPos {NET_ZONE, OBSERVATION_ZONE}
+    public enum StartPos {NET_ZONE, OBSERVATION_ZONE}
     /** Starting Position of the Robot */
     public static StartPos startPos = StartPos.OBSERVATION_ZONE;
 

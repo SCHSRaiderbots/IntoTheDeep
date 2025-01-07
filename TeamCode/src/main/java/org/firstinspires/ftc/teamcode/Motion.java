@@ -135,7 +135,7 @@ public class Motion {
     static private int cEncoderRight;
 
     // choose a drive mode
-    enum DriveMode {TANK, ARCADE, ARCADE_ONE_STICK}
+    public enum DriveMode {TANK, ARCADE, ARCADE_ONE_STICK}
     static DriveMode driveMode = DriveMode.ARCADE;
 
     /**
@@ -147,6 +147,13 @@ public class Motion {
         LogDevice.dumpFirmware(hardwareMap);
 
         // initialize the robot
+        double rpm;
+        double revsPerSecond;
+        double ticksPerRev;
+        double f;
+        PIDFCoefficients pidfRUE;
+        PIDFCoefficients pidfR2P;
+
         switch (robot) {
             case ROBOT_MECANUM:
                 // give up on mecanum
@@ -169,12 +176,12 @@ public class Motion {
                 //  .getMaxRPM(); -> 137 ,, 300 == 6000/20
                 //  .getTicksPerRev(); -> 288,, 560 == 20 * 28
                 //  .getAchieveableMaxTicksPerSecond 559,, 2380
-                double rpm = 120.0;
-                double revsPerSecond = rpm / 60.0;
-                double ticksPerRev = 288.0;
-                double f = 32000.0 / (ticksPerRev * revsPerSecond);
-                PIDFCoefficients pidfRUE = new PIDFCoefficients(10, 1, 0, f, MotorControlAlgorithm.PIDF);
-                PIDFCoefficients pidfR2P = new PIDFCoefficients(10, 0, 0, 0, MotorControlAlgorithm.PIDF);
+                rpm = 120.0;
+                revsPerSecond = rpm / 60.0;
+                ticksPerRev = 288.0;
+                f = 32000.0 / (ticksPerRev * revsPerSecond);
+                pidfRUE = new PIDFCoefficients(10, 1, 0, f, MotorControlAlgorithm.PIDF);
+                pidfR2P = new PIDFCoefficients(10, 0, 0, 0, MotorControlAlgorithm.PIDF);
                 setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfRUE);
                 setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pidfR2P);
                 break;
@@ -213,7 +220,6 @@ public class Motion {
                 dcmotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
                 setRobotDims2021();
-
 
                 rpm = 6000.0;
 
@@ -307,6 +313,7 @@ public class Motion {
     /**
      * Odometry must know which motors are being used...
      */
+    @SuppressWarnings("unused")
     static void setRobotMotors(DcMotorEx mLeft, DcMotorEx mRight)
     {
         // remember the motors.
@@ -359,6 +366,7 @@ public class Motion {
     /**
      * Yuk. Want to zero the integration term in the PID controller.
      */
+    @SuppressWarnings("unused")
     static void resetPID() {
         dcmotorLeft.setMotorDisable();
         dcmotorRight.setMotorDisable();
@@ -370,6 +378,7 @@ public class Motion {
      * Set the drive motor target velocity. (RunMode should be RUN_USING_ENCODER.)
      * @param velocity velocity for the motors (ticks/second)
      */
+    @SuppressWarnings("unused")
     static void setVelocity(double velocity) {
         // set the velocity
         setVelocity(velocity, velocity);
@@ -537,6 +546,7 @@ public class Motion {
      * Set the important dimensions of the robot.
      * Depends on variable robot.
      */
+    @SuppressWarnings("unused")
     static void setRobotDims() {
         switch (robot) {
             case ROBOT_2018:
@@ -639,6 +649,7 @@ public class Motion {
      * Get the current position tolerance in inches.
      * @return tolerance in inches
      */
+    @SuppressWarnings("unused")
     static double getMotorToleranceInches() {
         return getMotorToleranceMeters() / 0.0254 ;
     }
@@ -716,10 +727,12 @@ public class Motion {
      * @param inLeft distance to move the left motor in inches
      * @param inRight distance to move the right motor in inches
      */
+    @SuppressWarnings("unused")
     static void moveMotorsInches(double inLeft, double inRight) {
         moveMotorsMeters(inLeft * 0.0254, inRight * 0.0254);
     }
 
+    @SuppressWarnings("unused")
     static void moveMotorsTiles(double tileLeft, double tileRight) {
         moveMotorsMeters(tileLeft * metersPerTile, tileRight * metersPerTile);
     }
@@ -743,6 +756,7 @@ public class Motion {
         moveMeters(in * 0.0254);
     }
 
+    @SuppressWarnings("unused")
     static void moveTiles(double tile) {
         moveMeters(tile * metersPerTile);
     }
@@ -764,6 +778,7 @@ public class Motion {
      * Commands the motors to move.
      * @param degrees angle to turn in degrees
      */
+    @SuppressWarnings("unused")
     static void turnDegrees(double degrees) {
         // convert degrees to radians
         double radians = degrees * (Math.PI / 180.0);
@@ -811,6 +826,7 @@ public class Motion {
         turnRadians(radianTurn);
     }
 
+    @SuppressWarnings("unused")
     static void headTowardTiles(double x, double y) {
         // get the heading
         double heading = headingTiles(x, y);
@@ -843,6 +859,7 @@ public class Motion {
      * @param yTiles position's y in tiles
      * @return distance in tiles
      */
+    @SuppressWarnings("unused")
     static double distanceToTiles(double xTiles, double yTiles) {
         double xMeters = xTiles * metersPerTile;
         double yMeters = yTiles * metersPerTile;

@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.IntoTheDeep.tileX;
-import static org.firstinspires.ftc.teamcode.IntoTheDeep.tileXR;
-import static org.firstinspires.ftc.teamcode.IntoTheDeep.tileYR;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;

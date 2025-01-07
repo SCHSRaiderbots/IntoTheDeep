@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class SampleDetector {
-    enum SAMPLE_COLOR {NAUGHT, BLUE, RED, YELLOW }
+    public enum SAMPLE_COLOR {NAUGHT, BLUE, RED, YELLOW }
 
     /** The colorSensor */
     NormalizedColorSensor colorSensor;

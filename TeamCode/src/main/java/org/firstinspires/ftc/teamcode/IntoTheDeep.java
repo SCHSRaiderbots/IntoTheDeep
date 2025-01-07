@@ -36,8 +36,11 @@ public class IntoTheDeep {
     public static double tileY(double tiles) { return tiles * Motion.inchesPerTile; }
     public static double tileY(double tiles, double inches) { return tiles * Motion.inchesPerTile + inches; }
 
+    @SuppressWarnings("unused")
     public static double tileXR(double tiles) { return tileX(tiles); }
+    @SuppressWarnings("unused")
     public static double tileXR(double tiles, double inches) { return tileX(tiles, inches); }
+    @SuppressWarnings("unused")
     public static double tileYR(double tiles) {
         switch (alliance) {
             case BLUE:
@@ -47,6 +50,7 @@ public class IntoTheDeep {
                 return tileY(tiles);
         }
     }
+    @SuppressWarnings("unused")
     public static double tileYR(double tiles, double inches) {
         switch (alliance) {
             case BLUE:

@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.command.Command;
 import org.firstinspires.ftc.teamcode.command.SequentialCommandGroup;
 
 @Autonomous(name="Auto Wave", group="testing")
+@SuppressWarnings("unused")
 public class AutoWave extends OpMode {
     Command command;
     Vision vision;

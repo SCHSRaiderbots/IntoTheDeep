@@ -20,6 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
  * TeleOp mode for competition.
  */
 @TeleOp(name="Teleop Drive", group ="Competition")
+@SuppressWarnings("unused")
 public class TeleopDrive extends OpMode {
 
     // the Vision object

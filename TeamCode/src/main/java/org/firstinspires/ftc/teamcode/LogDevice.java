@@ -75,6 +75,7 @@ class LogDevice {
         }
     }
 
+    @SuppressWarnings("unused")
     static void dump(String name, HardwareDevice device) {
         Log.d(TAG, "hardware device " + name);
         Log.d(TAG, "  version: " + device.getVersion());
@@ -190,6 +191,7 @@ class LogDevice {
      * @param name - usually the variable name for the servo
      * @param servo - the servo to describe
      */
+    @SuppressWarnings("unused")
     static void dump(String name, Servo servo) {
         Log.d(TAG, "servo information for " + name);
         // not very interesting: just says "Servo"
@@ -211,6 +213,7 @@ class LogDevice {
      * @param name name of the gamepad
      * @param gamepad the gamepad device
      */
+    @SuppressWarnings("unused")
     static void dump(String name, Gamepad gamepad) {
         Log.d(TAG, "gamepad information for " + name);
         Log.d(TAG, "  type: " + gamepad.type);

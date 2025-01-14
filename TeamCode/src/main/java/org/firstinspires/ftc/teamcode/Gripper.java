@@ -1,33 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 public class Gripper {
-    Servo servoGripper;
-
-    private final double posFlat = 0.0;
-    private final double posGrip = 0.5;
+    CRServo servoGripper;
 
     public Gripper(HardwareMap hardwareMap) {
         // find the servo
-        servoGripper = hardwareMap.get(Servo.class, "gripper");
+        servoGripper = hardwareMap.get(CRServo.class, "gripper");
 
-        // set the servo to a known position
-        servoGripper.setPosition(posFlat);
+        // set the servo to a known value
+        grip(0.0);
     }
 
-    public void grip() {
+    public void grip(double speed) {
         // start gripping
-        servoGripper.setPosition(posGrip);
-    }
-
-    public void grip(boolean bGrip) {
-        servoGripper.setPosition((bGrip)? posGrip : posFlat);
-    }
-
-    public void release() {
-        // release the grip
-        servoGripper.setPosition(posFlat);
+        servoGripper.setPower(speed);
     }
 }

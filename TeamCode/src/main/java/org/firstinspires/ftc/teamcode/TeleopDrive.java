@@ -70,6 +70,9 @@ public class TeleopDrive extends OpMode {
 
             // get the Sample detector
             sampler = new SampleDetector(hardwareMap);
+
+            // get the gripper
+            gripper = new Gripper(hardwareMap);
         }
 
         // create the subsystems
@@ -78,8 +81,6 @@ public class TeleopDrive extends OpMode {
 
             wrist = new Wrist(hardwareMap);
         }
-
-        gripper = new Gripper(hardwareMap);
 
         if (bIMU) {
             // Set up the parameters with which we will use our IMU. Note that integration
@@ -158,11 +159,8 @@ public class TeleopDrive extends OpMode {
         double v = (rpm / 60) * Motion.HD_HEX_TICKS_PER_REV;
         Motion.setVelocity(v * (forward+turn), v * (forward-turn));
 
-        if (gamepad1.a) {
-            gripper.release();
-        }
-        if (gamepad1.b) {
-            gripper.grip();
+        if (gripper != null) {
+            gripper.grip(gamepad2.left_stick_y);
         }
 
         // if we have a wrist...
@@ -173,6 +171,17 @@ public class TeleopDrive extends OpMode {
             } else {
                 wrist.setPower(power);
             }
+
+            if (gamepad2.dpad_down) {
+                wrist.setPosition(Wrist.WristPosition.GROUND);
+            }
+            if (gamepad2.dpad_left) {
+                wrist.setPosition(Wrist.WristPosition.HORIZ);
+            }
+            if (gamepad2.dpad_up) {
+                wrist.setPosition(Wrist.WristPosition.BASKET);
+            }
+
         }
 
         if (gamepad1.y) {
@@ -183,10 +192,13 @@ public class TeleopDrive extends OpMode {
         // if we have an elevator
         if (elevator != null) {
             if (gamepad2.a) {
-                elevator.setTargetPosition(800);
+                elevator.setTargetPosition(Elevator.ElevatorPosition.BOTTOM);    // was 800
             }
             if (gamepad2.b) {
-                elevator.setTargetPosition(1900);
+                elevator.setTargetPosition(Elevator.ElevatorPosition.LOW_NET);   // was 1900
+            }
+            if (gamepad2.y) {
+                elevator.setTargetPosition(Elevator.ElevatorPosition.HIGH_NET);
             }
             telemetry.addData("Elevator Position", "%d units", elevator.getPosition());
         }

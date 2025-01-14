@@ -5,6 +5,17 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Elevator {
+    enum ElevatorPosition {
+        BOTTOM(0.0),
+        LOW_NET(25.5),
+        HIGH_NET(42.75);
+
+        final int m_height;
+
+        ElevatorPosition(double height) {
+            m_height = (int)height;
+        }
+    }
     /** motor that drives the elevator */
     DcMotorEx motor;
 
@@ -26,6 +37,10 @@ public class Elevator {
 
     public void setTargetPosition(int pos) {
         motor.setTargetPosition(pos);
+    }
+
+    public void setTargetPosition(ElevatorPosition pos) {
+        setTargetPosition(pos.m_height);
     }
 
     public void setTargetPositionInches(double inches) {

@@ -1,15 +1,16 @@
 package org.firstinspires.ftc.teamcode.command;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class CommandTest {
-    private class Foo extends Command {
+    private static class Foo extends Command {
 
     }
-    private class Counter extends Command {
+    private static class Counter extends Command {
         int m_countMax;
         int m_count;
 
@@ -44,7 +45,7 @@ public class CommandTest {
         assertFalse(foo.runsWhenDisabled());
 
         // has default interruption behavior
-        assertTrue(foo.getInterruptionBehavior() == Command.InterruptionBehavior.kCancelSelf);
+        assertSame(foo.getInterruptionBehavior(), Command.InterruptionBehavior.kCancelSelf);
 
         // initialize the command
         foo.initialize();

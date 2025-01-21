@@ -72,6 +72,7 @@ public class AutoWave extends OpMode {
 
     @Override
     public void stop() {
+        // TODO: make a decent scheduler
         command.end(true);
     }
 }

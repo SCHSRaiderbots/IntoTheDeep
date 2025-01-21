@@ -33,5 +33,9 @@ public class CommandSchedulerTests {
         // remove it
         foo.cancel();
         assertFalse(scheduler.isScheduled(foo));
+
+        // use to get rid of warnings
+        scheduler.disable();
+        scheduler.enable();
     }
 }

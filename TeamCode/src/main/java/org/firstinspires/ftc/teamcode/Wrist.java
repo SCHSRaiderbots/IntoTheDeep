@@ -12,6 +12,7 @@ public class Wrist {
         GROUND(-41.1),
         SKIM(-36.0),
         HORIZ(0.0),
+        VERTICAL(90.0),
         BASKET(135.0);
 
         final double angle;
@@ -58,10 +59,17 @@ public class Wrist {
 
         // set the target position
         motor.setTargetPosition(ticks);
+
+        // set the power so we do not drive into the ground
+        setPower( (degrees < WristPosition.SKIM.angle) ? 0.1 : 0.8);
     }
 
     public void setPosition(WristPosition pos) {
         // simply move to the enumerated position
         setPosition(pos.angle);
+    }
+
+    public boolean isBusy() {
+        return motor.isBusy();
     }
 }

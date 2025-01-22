@@ -28,7 +28,7 @@ public class Elevator {
         // use PID control
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        motor.setPower(1.0);
+        setPower(1.0);
     }
 
     public int getPosition() {

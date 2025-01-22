@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class Wrist {
-    enum WristPosition {
+    public enum WristPosition {
         GROUND(-41.1),
         SKIM(-36.0),
         HORIZ(0.0),

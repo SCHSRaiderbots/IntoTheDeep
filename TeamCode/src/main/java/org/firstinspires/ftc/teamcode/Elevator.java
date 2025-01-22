@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Elevator {
-    enum ElevatorPosition {
+    public enum ElevatorPosition {
         BOTTOM(0.75),
         LOW_NET(25.5),
         HIGH_NET(42.75);

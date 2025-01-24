@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.teamcode.Wrist.WristPosition;
+import static org.firstinspires.ftc.teamcode.Elevator.ElevatorPosition;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -57,29 +60,29 @@ public class AutoWave extends OpMode {
                 // new DriveTurnToward(tileXR(2.5), tileYR(-0.5)),
                 // new DriveTo(tileX(2.5), tileYR(-0.5)),
                 // new MoveArm(0, arm)
-                new WristCommand(Wrist.WristPosition.BASKET, wrist),
+                new WristCommand(WristPosition.BASKET, wrist),
                 new DriveForward(20.0),
                 new DriveTurnToward(-49, -26),
-                new WristCommand(Wrist.WristPosition.HORIZ, wrist),
+                new WristCommand(WristPosition.HORIZ, wrist),
                 new DriveForward (5.0),
-                new WristCommand(Wrist.WristPosition.SKIM, wrist),
+                new WristCommand(WristPosition.SKIM, wrist),
                 new GripperCommand(1.0, gripper),
-                new WristCommand(Wrist.WristPosition.GROUND, wrist),
+                new WristCommand(WristPosition.GROUND, wrist),
                 new DriveForward(6.0),
                 // new DriveForward(2.0),
                 // new DriveForward(2.0),
-                new WristCommand(Wrist.WristPosition.HORIZ, wrist),
+                new WristCommand(WristPosition.HORIZ, wrist),
                 new GripperCommand(0.0, gripper),
                 new DriveForward(-3.0),
-                new WristCommand(Wrist.WristPosition.BASKET, wrist),
+                new WristCommand(WristPosition.BASKET, wrist),
                 new GripperCommand(1.0, gripper),
-                new WristCommand(Wrist.WristPosition.VERTICAL, wrist),
+                new WristCommand(WristPosition.VERTICAL, wrist),
                 new GripperCommand(0.0, gripper),
-                // new WristCommand(Wrist.WristPosition.GROUND, wrist),
+                // new WristCommand(WristPosition.GROUND, wrist),
                 new DriveTurnToward(0,0),
                 new DriveForward(-29.0),
-                new ElevatorCommand(Elevator.ElevatorPosition.HIGH_NET, elevator),
-                new ElevatorCommand(Elevator.ElevatorPosition.BOTTOM,elevator)
+                new ElevatorCommand(ElevatorPosition.HIGH_NET, elevator),
+                new ElevatorCommand(ElevatorPosition.BOTTOM,elevator)
         );
 
         command.initialize();

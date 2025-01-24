@@ -4,7 +4,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Elevator {
+import org.firstinspires.ftc.teamcode.command.SubsystemBase;
+
+public class Elevator extends SubsystemBase {
     public enum ElevatorPosition {
         BOTTOM(0.75),
         LOW_NET(25.5),

@@ -29,7 +29,7 @@ public class AutoWave extends OpMode {
         gripper = new Gripper(hardwareMap);
         elevator = new Elevator(hardwareMap);
 
-        IntoTheDeep.init();;
+        IntoTheDeep.init();
 
         Motion.setPoseInches(-24, -60, 90.0);
         Motion.setPower(0.2);

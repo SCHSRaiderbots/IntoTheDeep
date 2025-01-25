@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Gripper {
+import org.firstinspires.ftc.teamcode.command.SubsystemBase;
+
+public class Gripper extends SubsystemBase {
     CRServo servoGripper;
 
     public Gripper(HardwareMap hardwareMap) {

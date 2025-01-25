@@ -7,7 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-public class Wrist {
+import org.firstinspires.ftc.teamcode.command.SubsystemBase;
+
+public class Wrist extends SubsystemBase {
     public enum WristPosition {
         GROUND(-41.1),
         SKIM(-36.0),

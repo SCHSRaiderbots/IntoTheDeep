@@ -4,11 +4,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Elevator {
+import org.firstinspires.ftc.teamcode.command.SubsystemBase;
+
+public class Elevator extends SubsystemBase {
     public enum ElevatorPosition {
         BOTTOM(0.75),
         LOW_NET(25.5),
-        HIGH_NET(42.75);
+        HIGH_NET(35.0 + 0.0 * 42.75);
 
         final double m_height;
 
@@ -49,6 +51,10 @@ public class Elevator {
         double ticks = (inches - 0.75) * (1900.0 / 37.5);
 
         setTargetPosition((int)ticks);
+    }
+
+    public boolean isFinished() {
+        return !motor.isBusy();
     }
 
     public void setPower(double power) {

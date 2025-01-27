@@ -64,11 +64,18 @@ public class CommandSchedulerTests {
         // make a new command.
         Command count5 = new Counter(5);
 
+        Command count3 = new Counter(3);
+
         // schedule it (runs initialize())
         count5.schedule();
 
         // make sure it is scheduled
         assertTrue(scheduler.isScheduled(count5));
+
+        // count 3 has not been scheduled
+        assertFalse(scheduler.isScheduled(count3));
+        // all of these are not scheduled
+        assertFalse(scheduler.isScheduled(count3, count5));
 
         // not finished
         assertFalse(count5.isFinished());

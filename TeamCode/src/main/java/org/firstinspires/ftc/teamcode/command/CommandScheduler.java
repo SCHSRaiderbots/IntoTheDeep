@@ -57,10 +57,39 @@ public class CommandScheduler {
         return instance;
     }
 
-    public void cancel(Command ... commands) {
-        // TODO: implement
-        for (Command command: commands) {
+    /**
+     * Cancels commands. The scheduler will only call {@link Command#end(boolean)} method of the
+     * canceled command with {@code true}, indicating they were canceled (as opposed to finishing
+     * normally).
+     *
+     * <p>Commands will be canceled regardless of {@link InterruptionBehavior interruption behavior}.
+     *
+     * @param commands the commands to cancel
+     */
+    public void cancel(Command... commands) {
+        if (m_inRunLoop) {
+            m_toCancel.addAll(List.of(commands));
+            return;
+        }
+
+        for (Command command : commands) {
+            if (command == null) {
+                // DriverStation.reportWarning("Tried to cancel a null command", true);
+                continue;
+            }
+            if (!isScheduled(command)) {
+                continue;
+            }
+
             m_scheduledCommands.remove(command);
+            m_requirements.keySet().removeAll(command.getRequirements());
+            command.end(true);
+            /*
+            for (Consumer<Command> action : m_interruptActions) {
+                action.accept(command);
+            }
+            m_watchdog.addEpoch(command.getName() + ".end(true)");
+             */
         }
     }
 

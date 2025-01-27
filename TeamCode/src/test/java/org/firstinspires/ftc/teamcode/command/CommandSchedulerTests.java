@@ -7,8 +7,25 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class CommandSchedulerTests {
-    private static class Foo extends Command {
+    private static class Counter extends Command {
+        int m_count;
+        int m_counter;
 
+        public Counter(int count) {
+            m_count = count;
+        }
+
+        public void initialize() {
+            m_counter = 0;
+        }
+
+        public void execute() {
+            m_counter++;
+        }
+
+        public boolean isFinished() {
+            return m_counter > m_count;
+        }
     }
 
     @Test
@@ -19,7 +36,7 @@ public class CommandSchedulerTests {
         CommandScheduler scheduler = CommandScheduler.getInstance();
 
         // make a command
-        Command foo = new Foo();
+        Command foo = new Counter(3);
 
         // that command should not be scheduled
         assertFalse(scheduler.isScheduled(foo));
@@ -37,5 +54,71 @@ public class CommandSchedulerTests {
         // use to get rid of warnings
         scheduler.disable();
         scheduler.enable();
+    }
+
+    @Test
+    public void runSchedulerTest() {
+        // get the scheduler
+        CommandScheduler scheduler = CommandScheduler.getInstance();
+
+        // make a new command.
+        Command count5 = new Counter(5);
+
+        // schedule it (runs initialize())
+        count5.schedule();
+
+        // make sure it is scheduled
+        assertTrue(scheduler.isScheduled(count5));
+
+        // not finished
+        assertFalse(count5.isFinished());
+
+        // run twice
+        scheduler.run();
+        scheduler.run();
+
+        // still false
+        assertFalse(count5.isFinished());
+        assertTrue(scheduler.isScheduled(count5));
+
+        // run 4 more times
+        scheduler.run();
+        scheduler.run();
+        scheduler.run();
+        scheduler.run();
+
+        // command should have finished
+        assertTrue(count5.isFinished());
+        assertFalse(scheduler.isScheduled(count5));
+
+
+        // Run it again...
+
+        // schedule it (runs initialize())
+        count5.schedule();
+
+        // make sure it is scheduled
+        assertTrue(scheduler.isScheduled(count5));
+
+        // not finished
+        assertFalse(count5.isFinished());
+
+        // run twice
+        scheduler.run();
+        scheduler.run();
+
+        // still false
+        assertFalse(count5.isFinished());
+        assertTrue(scheduler.isScheduled(count5));
+
+        // run 4 more times
+        scheduler.run();
+        scheduler.run();
+        scheduler.run();
+        scheduler.run();
+
+        // command should have finished
+        assertTrue(count5.isFinished());
+        assertFalse(scheduler.isScheduled(count5));
     }
 }

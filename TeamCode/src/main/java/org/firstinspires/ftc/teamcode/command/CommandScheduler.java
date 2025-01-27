@@ -64,13 +64,10 @@ public class CommandScheduler {
         }
     }
 
+    /** Cancels all commands that are currently scheduled. */
     public void cancelAll() {
-        // TODO: implement
-        for (Command command: m_scheduledCommands) {
-            // TODO: removing something in the list!
-            // maybe end(true) all and then clear the list
-            cancel(command);
-        }
+        // Copy to array to avoid concurrent modification.
+        cancel(m_scheduledCommands.toArray(new Command[0]));
     }
 
     /**

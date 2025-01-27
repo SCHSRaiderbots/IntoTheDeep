@@ -128,4 +128,23 @@ public class CommandSchedulerTests {
         assertTrue(count5.isFinished());
         assertFalse(scheduler.isScheduled(count5));
     }
+
+    @Test
+    public void cancelAllTest() {
+        CommandScheduler scheduler = CommandScheduler.getInstance();
+
+        Command count3 = new Counter(3);
+        Command count5 = new Counter(5);
+
+        count3.schedule();
+        count5.schedule();
+
+        assertTrue(scheduler.isScheduled(count3));
+        assertTrue(scheduler.isScheduled(count5));
+
+        scheduler.cancelAll();
+
+        assertFalse(scheduler.isScheduled(count3));
+        assertFalse(scheduler.isScheduled(count5));
+    }
 }

@@ -269,7 +269,7 @@ public class Motion {
 
                 // set the motor directions
                 dcmotorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-                dcmotorRight.setDirection(DcMotorSimple.Direction.REVERSE);
+                dcmotorRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
                 setRobotDims2023();
 

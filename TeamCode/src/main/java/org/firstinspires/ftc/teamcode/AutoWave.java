@@ -54,23 +54,8 @@ public class AutoWave extends OpMode {
         // set the starting pose
         Motion.setPoseInches(-24, -60, 90.0);
         Motion.setPower(0.4);
-    }
 
-    @Override
-    public void init_loop() {
-        // figure our position
-        Motion.updateRobotPose();
-
-        // collect the starting information
-        IntoTheDeep.init_loop(telemetry, gamepad1);
-
-        // report the starting position
-        telemetry.addData("pose", "%8.2f %8.2f %8.2f", Motion.xPoseInches, Motion.yPoseInches, Motion.thetaPoseDegrees);
-    }
-
-    @Override
-    public void start() {
-        // make the command
+        // make the command (so end() will not crash with a null pointer)
         command = new SequentialCommandGroup(
                 // new Delay(0.5),
                 // drive forward
@@ -102,6 +87,22 @@ public class AutoWave extends OpMode {
                 new ElevatorCommand(ElevatorPosition.HIGH_NET, elevator),
                 new ElevatorCommand(ElevatorPosition.BOTTOM,elevator)
         );
+    }
+
+    @Override
+    public void init_loop() {
+        // figure our position
+        Motion.updateRobotPose();
+
+        // collect the starting information
+        IntoTheDeep.init_loop(telemetry, gamepad1);
+
+        // report the starting position
+        telemetry.addData("pose", "%8.2f %8.2f %8.2f", Motion.xPoseInches, Motion.yPoseInches, Motion.thetaPoseDegrees);
+    }
+
+    @Override
+    public void start() {
 
         command.initialize();
         command.execute();

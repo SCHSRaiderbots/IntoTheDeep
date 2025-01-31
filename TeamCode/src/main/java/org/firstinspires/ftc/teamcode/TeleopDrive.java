@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.Motion.robot;
 
+import android.icu.lang.UCharacter;
 import android.util.Log;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -31,6 +32,8 @@ public class TeleopDrive extends OpMode {
     Wrist wrist = null;
 
     Gripper gripper;
+
+    Tray tray;
 
     SampleDetector sampler;
 
@@ -73,6 +76,9 @@ public class TeleopDrive extends OpMode {
 
             // get the gripper
             gripper = new Gripper(hardwareMap);
+
+            // get thw tray
+            tray = new Tray(hardwareMap);
         }
 
         // create the subsystems
@@ -163,6 +169,10 @@ public class TeleopDrive extends OpMode {
             gripper.grip(gamepad2.left_stick_y);
         }
 
+        if (tray != null) {
+            tray.setPosition(0.5 + 0.5 * gamepad2.right_stick_y);
+        }
+
         // if we have a wrist...
         if (wrist != null) {
             /*
@@ -195,15 +205,18 @@ public class TeleopDrive extends OpMode {
         }
 
         // if we have an elevator
-        if (elevator != null) {
+        if (elevator != null && wrist != null) {
             if (gamepad2.a) {
                 elevator.setTargetPosition(Elevator.ElevatorPosition.BOTTOM);    // was 800
+                wrist.setPosition(Wrist.WristPosition.VERTICAL);
             }
             if (gamepad2.b) {
                 elevator.setTargetPosition(Elevator.ElevatorPosition.LOW_NET);   // was 1900
+                wrist.setPosition(Wrist.WristPosition.VERTICAL);
             }
             if (gamepad2.y) {
                 elevator.setTargetPosition(Elevator.ElevatorPosition.HIGH_NET);
+                wrist.setPosition(Wrist.WristPosition.VERTICAL);
             }
             telemetry.addData("Elevator Position", "%d units", elevator.getPosition());
         }

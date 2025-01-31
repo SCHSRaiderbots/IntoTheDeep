@@ -38,13 +38,13 @@ public class Wrist extends SubsystemBase {
         motor.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pidfR2P);
 
         // set the initial target position (always start at ground level)
-        setPosition(WristPosition.GROUND);
+        // setPosition(WristPosition.GROUND);
 
         // set the mode
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // set the power
-        motor.setPower(0.8);
+        // motor.setPower(0.8);
     }
 
     public void setPower(double power) {
@@ -62,8 +62,10 @@ public class Wrist extends SubsystemBase {
         // set the target position
         motor.setTargetPosition(ticks);
 
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         // set the power so we do not drive into the ground
-        setPower( (degrees < WristPosition.SKIM.angle) ? 0.1 : 0.8);
+        setPower( (degrees < WristPosition.SKIM.angle) ? 0.1 : 1.0);
     }
 
     public void setPosition(WristPosition pos) {
@@ -73,5 +75,12 @@ public class Wrist extends SubsystemBase {
 
     public boolean isBusy() {
         return motor.isBusy();
+    }
+
+    public void reset() {
+        // set power level to 0
+        motor.setPower(0.0);
+        // reset the encoders
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

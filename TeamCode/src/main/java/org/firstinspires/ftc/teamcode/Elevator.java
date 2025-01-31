@@ -9,8 +9,8 @@ import org.firstinspires.ftc.teamcode.command.SubsystemBase;
 public class Elevator extends SubsystemBase {
     public enum ElevatorPosition {
         BOTTOM(0.75),
-        LOW_NET(25.5),
-        HIGH_NET(35.0 + 0.0 * 42.75);
+        LOW_NET(25.5 - 9.0),
+        HIGH_NET(42.75 - 9.0);
 
         final double m_height;
 
@@ -25,12 +25,12 @@ public class Elevator extends SubsystemBase {
         // get the motor
         motor = hardwareMap.get(DcMotorEx.class, "motorElevator");
 
-        motor.setTargetPosition(0);
+        // motor.setTargetPosition(0);
 
         // use PID control
-        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        setPower(1.0);
+        // setPower(1.0);
     }
 
     public int getPosition() {
@@ -41,10 +41,8 @@ public class Elevator extends SubsystemBase {
     public void setTargetPosition(int pos) {
 
         motor.setTargetPosition(pos);
-    }
-
-    public void setTargetPosition(ElevatorPosition pos) {
-        setTargetPosition(pos.m_height);
+        motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor.setPower(1.0);
     }
 
     public void setTargetPosition(double inches) {
@@ -53,11 +51,21 @@ public class Elevator extends SubsystemBase {
         setTargetPosition((int)ticks);
     }
 
+    public void setTargetPosition(ElevatorPosition pos) {
+        setTargetPosition(pos.m_height);
+    }
+
     public boolean isFinished() {
         return !motor.isBusy();
     }
 
     public void setPower(double power) {
         motor.setPower(power);
+    }
+
+    public void reset() {
+        // reset the encoders
+        motor.setPower(0);
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

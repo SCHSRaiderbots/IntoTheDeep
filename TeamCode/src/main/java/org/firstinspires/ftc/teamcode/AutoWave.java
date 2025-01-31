@@ -16,6 +16,7 @@ public class AutoWave extends OpMode {
     Vision vision;
     // Arm arm;
     Wrist wrist;
+    Tray tray;
     Gripper gripper;
     Elevator elevator;
 
@@ -25,17 +26,34 @@ public class AutoWave extends OpMode {
         Motion.robot = RobotId.identifyRobot(hardwareMap);
         Motion.init(hardwareMap);
 
+        // get the vision system
         vision = new Vision(hardwareMap);
 
-        // arm = new Arm(hardwareMap);
+        // get the wrist
         wrist = new Wrist(hardwareMap);
+        // reset the wrist encoder in auto
+        wrist.reset();
+        // go to the basket position
+        wrist.setPosition(WristPosition.BASKET);
+
+        // get the gripper
         gripper = new Gripper(hardwareMap);
+
+        // get the tray
+        tray = new Tray(hardwareMap);
+
+        // get the elevator
         elevator = new Elevator(hardwareMap);
+        // reset the encoder
+        elevator.reset();
+        // set the target position
+        elevator.setTargetPosition(ElevatorPosition.BOTTOM);
 
         IntoTheDeep.init();
 
+        // set the starting pose
         Motion.setPoseInches(-24, -60, 90.0);
-        Motion.setPower(0.2);
+        Motion.setPower(0.4);
     }
 
     @Override

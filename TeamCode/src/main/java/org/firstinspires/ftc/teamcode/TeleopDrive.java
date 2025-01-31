@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.Motion.robot;
 
-import android.icu.lang.UCharacter;
 import android.util.Log;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;

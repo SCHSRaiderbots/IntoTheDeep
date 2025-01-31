@@ -42,7 +42,9 @@ public class Elevator extends SubsystemBase {
 
         motor.setTargetPosition(pos);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motor.setPower(1.0);
+
+        // after a position command is given, set the power
+        setPower(1.0);
     }
 
     public void setTargetPosition(double inches) {
@@ -65,7 +67,7 @@ public class Elevator extends SubsystemBase {
 
     public void reset() {
         // reset the encoders
-        motor.setPower(0);
+        setPower(0.0);
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

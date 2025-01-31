@@ -85,7 +85,8 @@ public class AutoWave extends OpMode {
                 new DriveTurnToward(0,0),
                 new DriveForward(-29.0),
                 new ElevatorCommand(ElevatorPosition.HIGH_NET, elevator),
-                new ElevatorCommand(ElevatorPosition.BOTTOM,elevator)
+                new TrayDump(tray),
+                new ElevatorCommand(ElevatorPosition.BOTTOM, elevator)
         );
     }
 

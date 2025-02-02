@@ -213,6 +213,10 @@ public class TeleopDrive extends OpMode {
                 elevator.setTargetPosition(Elevator.ElevatorPosition.LOW_NET);   // was 1900
                 wrist.setPosition(Wrist.WristPosition.VERTICAL);
             }
+            if (gamepad2.x) {
+                elevator.setTargetPosition(Elevator.ElevatorPosition.TRANSFER);
+                wrist.setPosition(Wrist.WristPosition.BASKET);
+            }
             if (gamepad2.y) {
                 elevator.setTargetPosition(Elevator.ElevatorPosition.HIGH_NET);
                 wrist.setPosition(Wrist.WristPosition.VERTICAL);

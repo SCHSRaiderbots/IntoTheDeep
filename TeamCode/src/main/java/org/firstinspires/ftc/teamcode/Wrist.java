@@ -15,7 +15,8 @@ public class Wrist extends SubsystemBase {
         SKIM(-36.0),
         HORIZ(0.0),
         VERTICAL(90.0),
-        BASKET(135.0);
+        BASKET(125.0),
+        STOW(135.0);
 
         final double angle;
 
@@ -65,7 +66,7 @@ public class Wrist extends SubsystemBase {
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // set the power so we do not drive into the ground
-        setPower( (degrees < WristPosition.SKIM.angle) ? 0.1 : 1.0);
+        setPower( (degrees < WristPosition.SKIM.angle) ? 0.2 : 1.0);
     }
 
     public void setPosition(WristPosition pos) {

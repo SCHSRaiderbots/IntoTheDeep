@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.command.SubsystemBase;
 public class Elevator extends SubsystemBase {
     public enum ElevatorPosition {
         BOTTOM(0.75),
+        TRANSFER(6.0),
         LOW_NET(25.5 - 9.0),
         HIGH_NET(42.75 - 9.0);
 

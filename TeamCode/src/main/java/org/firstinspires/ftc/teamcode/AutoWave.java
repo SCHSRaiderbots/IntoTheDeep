@@ -68,7 +68,7 @@ public class AutoWave extends OpMode {
                 new ParallelCommandGroup(
                     new WristCommand(WristPosition.HORIZ, wrist),
                     new SequentialCommandGroup(
-                        new DriveForward(7.0),
+                        new DriveForward(9.0),
                         new DriveTurnToward(0.0, 0.0)),
                     new ElevatorCommand(ElevatorPosition.HIGH_NET, elevator)),
                 // align to score
@@ -98,7 +98,7 @@ public class AutoWave extends OpMode {
 
 
                 new DriveForward(15.0),
-                new Delay(0.5),
+                new Delay(1.0),
 
                 new ParallelCommandGroup(
                         new WristCommand(WristPosition.BASKET, wrist),
@@ -106,8 +106,9 @@ public class AutoWave extends OpMode {
 
 
                 // transfer sample to the tray
+                new Delay(2.0),
                 new GripperCommand(-0.35, gripper),
-                new Delay(1.2),
+                new Delay(2.5),
                 // drive back to the place to raise the elevator
 
                 new WristCommand(WristPosition.VERTICAL, wrist),

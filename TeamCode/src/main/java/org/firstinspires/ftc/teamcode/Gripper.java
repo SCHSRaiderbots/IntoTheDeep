@@ -12,6 +12,8 @@ public class Gripper extends SubsystemBase {
         // find the servo
         servoGripper = hardwareMap.get(CRServo.class, "gripper");
 
+        LogDevice("gripper", servoGripper);
+
         // set the servo to a known value
         grip(0.0);
     }

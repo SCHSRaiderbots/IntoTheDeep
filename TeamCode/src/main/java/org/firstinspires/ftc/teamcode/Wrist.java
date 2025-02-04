@@ -50,11 +50,11 @@ public class Wrist extends SubsystemBase {
         // find the wrist's motor
         motor = hardwareMap.get(DcMotorEx.class, "motorWrist");
 
-        motor.getMotorType().getGearing();
-        motor.getMotorType().getAchieveableMaxTicksPerSecond();
-        motor.getMotorType().getAchieveableMaxRPMFraction();
-        motor.getMotorType().getMaxRPM();
-        motor.getMotorType().getTicksPerRev();
+        // motor.getMotorType().getGearing();
+        // motor.getMotorType().getAchieveableMaxTicksPerSecond();
+        // motor.getMotorType().getAchieveableMaxRPMFraction();
+        // motor.getMotorType().getMaxRPM();
+        // motor.getMotorType().getTicksPerRev();
 
         // set motor direction so positive is up
         motor.setDirection(DcMotorSimple.Direction.REVERSE);

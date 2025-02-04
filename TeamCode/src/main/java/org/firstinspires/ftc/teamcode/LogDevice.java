@@ -130,21 +130,31 @@ class LogDevice {
         // These values scare me a bit: does each motor get its own instance of a motor type?
         // Or do all UltraPlanetary motors share the same motor type?
         //   here is some data
+
+        // Motor type
         // +++ REV Robotics Core Hex Motor
         // *** REV RoboticsUltraPlanetary HD Hex Motor
         Log.d("    motor type", motor.getMotorType().getName());
+
         // ticks
         // +++ 288.0 (REV says 4 ticks/motorRev times 72)
         // *** 560 (so 20 * 28 ticks/rev)
         Log.d("    motor ticks", String.valueOf(motor.getMotorType().getTicksPerRev()));
+
         // max RPM
         // +++ 137.0 (documents say 125 RPM)
         // *** 300 (so 6000 / 20)
         Log.d("    motor rpm", String.valueOf(motor.getMotorType().getMaxRPM()));
-        // achievable ticks/second
-        // +++ 558.9599999999
+
+        // achievable RPM fraction
+        // *** 0.85
+        // ***
+        Log.d("    motor achievable rpm fraction", String.valueOf(motor.getMotorType().getAchieveableMaxRPMFraction()));        // achievable ticks/second
+
+        // +++ 558.9599999999 = 288 * (137 / 60) * 0.85
         // *** 2380.
         Log.d("    motor achievable ticks/sec", String.valueOf(motor.getMotorType().getAchieveableMaxTicksPerSecond()));
+
         // gearing reported as
         // +++ 36.25!
         // *** 20

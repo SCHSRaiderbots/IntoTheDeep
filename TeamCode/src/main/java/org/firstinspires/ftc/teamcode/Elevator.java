@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.command.SubsystemBase;
 
@@ -22,16 +24,25 @@ public class Elevator extends SubsystemBase {
     /** motor that drives the elevator */
     DcMotorEx motor;
 
+    // this is the default value -- it has no F
+    // PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 3.0, 0.0, 0.0, MotorControlAlgorithm.LegacyPID);
+    // TODO: more intelligent values
+    PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 0.0, 0.0, 500.0, MotorControlAlgorithm.PIDF);
+
+    // Run to Position PIDF
+    PIDFCoefficients pidfR2P = new PIDFCoefficients(1.0, 0.0, 0.0, 0.0, MotorControlAlgorithm.PIDF);
+
+
     public Elevator(HardwareMap hardwareMap) {
         // get the motor
         motor = hardwareMap.get(DcMotorEx.class, "motorElevator");
 
-        // motor.setTargetPosition(0);
+        motor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfRUE);
+        motor.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pidfR2P);
 
-        // use PID control
-        // motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        LogDevice.dump("elevator", motor);
 
-        // setPower(1.0);
+        // position, power, and mode will be set in setPosition() method
     }
 
     public int getPosition() {

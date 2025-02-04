@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import android.util.Log;
 
 import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -217,6 +218,28 @@ class LogDevice {
         // reports current position
         Log.d(TAG, "  position: " + servo.getPosition());
     }
+
+    /**
+     * Dump information about a Continuous Rotation Servo
+     * @param name the name of the servo
+     * @param servo the servo to describe
+     */
+    static void dump(String name, CRServo servo) {
+        Log.d(TAG, "servo information for " + name);
+        // not very interesting: just says "Servo"
+        Log.d(TAG, "  device name: " + servo.getDeviceName());
+        // not very interesting: just says "Lynx"
+        Log.d(TAG, "  manufacturer: " + servo.getManufacturer());
+        // reports into which port the servo is plugged
+        Log.d(TAG, "  port number: " + servo.getPortNumber());
+
+        // direction
+        Log.d(TAG, "  direction: " + servo.getDirection());
+
+        // reports current position
+        Log.d(TAG, "  power: " + servo.getPower());
+    }
+
 
     /**
      * Dump a gamepad

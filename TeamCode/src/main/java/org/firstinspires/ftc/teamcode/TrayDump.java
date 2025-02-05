@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.command.Command;
 
 public class TrayDump extends Command {
-    final Tray m_tray;
-    final ElapsedTime elapsed = new ElapsedTime();
+    private final Tray m_tray;
+    private final ElapsedTime elapsed = new ElapsedTime();
 
     public TrayDump(Tray tray) {
         // remember the subsystem

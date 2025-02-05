@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Tray {
-    final Servo servo;
+    private final Servo servo;
 
     public Tray(HardwareMap hardwareMap) {
         servo = hardwareMap.get(Servo.class, "Tray");

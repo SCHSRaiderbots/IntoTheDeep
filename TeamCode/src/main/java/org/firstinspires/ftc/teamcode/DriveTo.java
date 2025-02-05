@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.command.Command;
 
 public class DriveTo extends Command {
-    final double m_x;
-    final double m_y;
+    private final double m_x;
+    private final double m_y;
 
     public DriveTo(double x, double y) {
         // remember the goal position

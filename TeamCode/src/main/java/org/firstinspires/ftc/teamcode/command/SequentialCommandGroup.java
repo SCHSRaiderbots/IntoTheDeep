@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.command;
 
 public class SequentialCommandGroup extends Command {
-    int iCommand;
-    final Command[] aCommands;
+    private int iCommand;
+    private final Command[] aCommands;
 
     /**
      * Execute a sequence of commands

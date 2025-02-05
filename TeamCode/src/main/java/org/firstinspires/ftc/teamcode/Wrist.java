@@ -130,8 +130,9 @@ public class Wrist extends SubsystemBase {
         setPosition(pos.angle);
     }
 
-    public boolean isBusy() {
-        return motor.isBusy();
+    public boolean isFinished() {
+        // we are finished when th emotor is not busy.
+        return !motor.isBusy();
     }
 
     /**

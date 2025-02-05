@@ -156,7 +156,7 @@ public class AutoWave extends OpMode {
         // collect the starting information
         IntoTheDeep.init_loop(telemetry, gamepad1);
 
-        if (!wrist.isBusy()) {
+        if (wrist.isFinished()) {
             wrist.setPower(0.0);
         }
 

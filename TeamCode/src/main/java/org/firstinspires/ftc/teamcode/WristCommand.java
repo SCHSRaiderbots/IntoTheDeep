@@ -16,6 +16,6 @@ public class WristCommand extends Command {
     }
 
     public boolean isFinished() {
-        return !m_wrist.isBusy();
+        return m_wrist.isFinished();
     }
 }

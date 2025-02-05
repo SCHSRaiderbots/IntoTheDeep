@@ -9,7 +9,7 @@ public class SequentialCommandGroup extends Command {
      */
     public SequentialCommandGroup(Command ... commands) {
         // remember all the commands
-        aCommands = commands;
+        final aCommands = commands;
 
         // fake that we are done
         iCommand = aCommands.length;

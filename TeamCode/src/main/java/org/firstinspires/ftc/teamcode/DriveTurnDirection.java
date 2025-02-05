@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.command.Command;
 
 public class DriveTurnDirection extends Command {
-    double m_x;
-    double m_y;
+    final double m_x;
+    final double m_y;
 
     public DriveTurnDirection(double x, double y) {
         // remember the direction
@@ -19,17 +19,7 @@ public class DriveTurnDirection extends Command {
     }
 
     @Override
-    public void execute() {
-        // nothing to do
-    }
-
-    @Override
     public boolean isFinished() {
         return Motion.finished();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        // nothing to do
     }
 }

@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.command.Command;
 
 public class GripperCommand extends Command {
-    Gripper m_gripper;
-    double m_power;
+    final Gripper m_gripper;
+    final double m_power;
 
     public GripperCommand(double power, Gripper gripper) {
         m_power = power;

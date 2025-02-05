@@ -6,10 +6,10 @@ import org.firstinspires.ftc.teamcode.command.Command;
 
 public class Delay extends Command {
     /** timer */
-    ElapsedTime elapsed = new ElapsedTime();
+    final ElapsedTime elapsed = new ElapsedTime();
 
     /** seconds of delay */
-    double m_delay;
+    final double m_delay;
 
     public Delay(double seconds) {
         // remember the delay time

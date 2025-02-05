@@ -13,9 +13,9 @@ public class SampleDetector {
     public enum SAMPLE_COLOR {NAUGHT, BLUE, RED, YELLOW }
 
     /** The colorSensor */
-    NormalizedColorSensor colorSensor;
+    final NormalizedColorSensor colorSensor;
 
-    float gain = 2;
+    final float gain = 2;
 
     /** HSV values from the sensor */
     final float[] hsvValues = new float[3];

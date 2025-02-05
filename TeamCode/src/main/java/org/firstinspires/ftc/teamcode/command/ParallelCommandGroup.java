@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.command;
 
 public class ParallelCommandGroup extends Command {
-    Command[] aCommands;
-    boolean[] bCommandDone;
+    final Command[] aCommands;
+    final boolean[] bCommandDone;
 
     public ParallelCommandGroup(Command ... commands) {
         aCommands = commands;

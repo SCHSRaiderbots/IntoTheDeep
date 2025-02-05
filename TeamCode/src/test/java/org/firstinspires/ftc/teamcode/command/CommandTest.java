@@ -11,7 +11,7 @@ public class CommandTest {
 
     }
     private static class Counter extends Command {
-        int m_countMax;
+        final int m_countMax;
         int m_count;
 
         Counter(int countMax) {

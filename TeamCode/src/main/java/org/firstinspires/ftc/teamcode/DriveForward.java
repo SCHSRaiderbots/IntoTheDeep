@@ -4,7 +4,7 @@ import org.firstinspires.ftc.teamcode.command.Command;
 
 public class DriveForward extends Command {
     /** distance to travel (inches) */
-    double m_distance;
+    final double m_distance;
 
     /**
      * Drive forward a specific distance

@@ -174,15 +174,6 @@ public class TeleopDrive extends OpMode {
 
         // if we have a wrist...
         if (wrist != null) {
-            /*
-            double power = -gamepad2.right_stick_y;
-            if (Math.abs(power) < 0.1) {
-                wrist.setPower(0.0);
-            } else {
-                wrist.setPower(power);
-            }
-             */
-
             if (gamepad2.dpad_down) {
                 wrist.setPosition(Wrist.WristPosition.GROUND);
             }

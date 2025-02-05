@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class CommandSchedulerTests {
     private static class Counter extends Command {
-        int m_count;
+        final int m_count;
         int m_counter;
 
         public Counter(int count) {

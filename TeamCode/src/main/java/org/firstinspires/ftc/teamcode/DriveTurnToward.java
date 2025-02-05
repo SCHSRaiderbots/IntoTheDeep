@@ -4,9 +4,9 @@ import org.firstinspires.ftc.teamcode.command.Command;
 
 public class DriveTurnToward extends Command {
     /** x-coordinate (inches) */
-    double m_x;
+    final double m_x;
     /** y-coordinate (inches) */
-    double m_y;
+    final double m_y;
 
     /**
      * Turn the robot toward a specific position
@@ -25,17 +25,7 @@ public class DriveTurnToward extends Command {
     }
 
     @Override
-    public void execute() {
-        // nothing to do
-    }
-
-    @Override
     public boolean isFinished() {
         return Motion.finished();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        // nothing to do
     }
 }

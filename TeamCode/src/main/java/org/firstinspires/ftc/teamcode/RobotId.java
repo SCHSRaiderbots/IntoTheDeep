@@ -65,9 +65,9 @@ public enum RobotId {
     /**
      * Set the default robot to robotId.
      * Then check the hardware map to find the robotId.
-     * @param hardwareMap
-     * @param robotId
-     * @return
+     * @param hardwareMap map to find devices
+     * @param robotId the robot
+     * @return robotId for this robot
      */
     static RobotId identifyRobot(HardwareMap hardwareMap, RobotId robotId) {
         // set the default robot

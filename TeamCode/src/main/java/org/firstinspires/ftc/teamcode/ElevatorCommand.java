@@ -4,8 +4,8 @@ import org.firstinspires.ftc.teamcode.command.Command;
 
 public class ElevatorCommand extends Command {
 
-    Elevator m_elevator;
-    Elevator.ElevatorPosition m_pos;
+    final Elevator m_elevator;
+    final Elevator.ElevatorPosition m_pos;
 
     public ElevatorCommand(Elevator.ElevatorPosition pos, Elevator elevator) {
         m_pos = pos;

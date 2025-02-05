@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.command.SubsystemBase;
 
 public class Gripper extends SubsystemBase {
-    CRServo servoGripper;
+    final CRServo servoGripper;
 
     public Gripper(HardwareMap hardwareMap) {
         // find the servo

@@ -60,7 +60,7 @@ public class Wrist extends SubsystemBase {
         //
         // this is the default value -- it has no F and significant I
         // PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 3.0, 0.0, 0.0, MotorControlAlgorithm.LegacyPID);
-        // TODO: more intelligent values
+        //
         // I think that goes something like 32000 / maxTicksPerSecond
         // but where was that information?
         // https://ftctechnh.github.io/ftc_app/doc/javadoc/index.html?com/qualcomm/robotcore/hardware/PIDFCoefficients.html

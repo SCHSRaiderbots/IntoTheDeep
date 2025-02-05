@@ -34,8 +34,8 @@ public class AutoPark extends OpMode {
         wrist = new Wrist(hardwareMap);
         // reset the wrist encoder in auto
         wrist.reset();
-        // go to the basket position
-        wrist.setPosition(WristPosition.BASKET);
+        // go to the stow position
+        wrist.setPosition(WristPosition.STOW);
 
         // get the gripper
         gripper = new Gripper(hardwareMap);

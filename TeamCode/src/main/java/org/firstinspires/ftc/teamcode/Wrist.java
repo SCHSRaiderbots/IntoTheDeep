@@ -34,30 +34,51 @@ public class Wrist extends SubsystemBase {
     }
 
     /** the motor that moves the wrist */
-    DcMotorEx motor;
+    private DcMotorEx motor;
     /** Gear ratio for 15-tooth motor pinion driving 125-tooth wrist gear */
-    static final double gearRatio = 125.0 / 15.0;
+    private static final double gearRatio = 125.0 / 15.0;
 
-    // this is the default value -- it has no F
-    // PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 3.0, 0.0, 0.0, MotorControlAlgorithm.LegacyPID);
-    // TODO: more intelligent values
-    PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 0.0, 0.0, 500.0, MotorControlAlgorithm.PIDF);
-
-    // Run to Position PIDF
-    PIDFCoefficients pidfR2P = new PIDFCoefficients(1.0, 0.0, 0.0, 0.0, MotorControlAlgorithm.PIDF);
-
+    /**
+     * Construct an instance of the Wrist.
+     * <p>Sets new PIDF coefficients for the motor control algorithm.
+     * @param hardwareMap
+     */
     public Wrist(HardwareMap hardwareMap) {
         // find the wrist's motor
         motor = hardwareMap.get(DcMotorEx.class, "motorWrist");
 
+        // set motor direction so positive is up
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        // calculate the PIDF coefficients
+        // some useful methods
         // motor.getMotorType().getGearing();
         // motor.getMotorType().getAchieveableMaxTicksPerSecond();
         // motor.getMotorType().getAchieveableMaxRPMFraction();
         // motor.getMotorType().getMaxRPM();
         // motor.getMotorType().getTicksPerRev();
+        //
+        // this is the default value -- it has no F and significant I
+        // PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 3.0, 0.0, 0.0, MotorControlAlgorithm.LegacyPID);
+        // TODO: more intelligent values
+        // I think that goes something like 32000 / maxTicksPerSecond
+        // but where was that information?
+        // https://ftctechnh.github.io/ftc_app/doc/javadoc/index.html?com/qualcomm/robotcore/hardware/PIDFCoefficients.html
+        // gives no information about the units.
+        //
+        // https://docs.google.com/document/d/1tyWrXDfMidwYyP_5H4mZyVgaEswhOC35gvdmP-V-5hA/edit?tab=t.0#heading=h.61g9ixenznbx
+        // says F should be 32767 / maxVelocity where max velocity was measured using motor.getVelocity()...
+        // getVelocity() returns ticksPerSecond
+        // which would be about 32000 / 558.96 = 57.25
+        // double P = 10.0;
+        // double F = 500.0;
+        // an F of 500 seemed to give better performance....
+        double F = 32767.0 / motor.getMotorType().getAchieveableMaxTicksPerSecond();
+        final PIDFCoefficients pidfRUE = new PIDFCoefficients(10.0, 0.0, 0.0, F, MotorControlAlgorithm.PIDF);
 
-        // set motor direction so positive is up
-        motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        // Run to Position PIDF
+        // P was 1, but changed to 10 when F was changed above.
+        final PIDFCoefficients pidfR2P = new PIDFCoefficients(10.0, 0.0, 0.0, 0.0, MotorControlAlgorithm.PIDF);
 
         motor.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfRUE);
         motor.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, pidfR2P);

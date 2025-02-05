@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.command.Command;
-import org.firstinspires.ftc.teamcode.command.ParallelCommandGroup;
 import org.firstinspires.ftc.teamcode.command.SequentialCommandGroup;
 
 @Autonomous(name="Auto Park", group="testing")

@@ -22,7 +22,7 @@ public class Elevator extends SubsystemBase {
         }
     }
     /** motor that drives the elevator */
-    DcMotorEx motor;
+    private final DcMotorEx motor;
 
     public Elevator(HardwareMap hardwareMap) {
         // get the motor

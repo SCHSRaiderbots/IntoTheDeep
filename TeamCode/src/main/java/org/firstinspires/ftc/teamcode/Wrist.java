@@ -34,14 +34,14 @@ public class Wrist extends SubsystemBase {
     }
 
     /** the motor that moves the wrist */
-    private DcMotorEx motor;
+    private final DcMotorEx motor;
     /** Gear ratio for 15-tooth motor pinion driving 125-tooth wrist gear */
     private static final double gearRatio = 125.0 / 15.0;
 
     /**
      * Construct an instance of the Wrist.
      * <p>Sets new PIDF coefficients for the motor control algorithm.
-     * @param hardwareMap
+     * @param hardwareMap Map to lookup motor
      */
     public Wrist(HardwareMap hardwareMap) {
         // find the wrist's motor

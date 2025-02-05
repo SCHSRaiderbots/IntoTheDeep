@@ -2,14 +2,14 @@ package org.firstinspires.ftc.teamcode.command;
 
 public class SequentialCommandGroup extends Command {
     int iCommand;
-    Command[] aCommands;
+    final Command[] aCommands;
 
     /**
      * Execute a sequence of commands
      */
     public SequentialCommandGroup(Command ... commands) {
         // remember all the commands
-        final aCommands = commands;
+        aCommands = commands;
 
         // fake that we are done
         iCommand = aCommands.length;
